@@ -1,61 +1,69 @@
-# E-commerce Database Schema
+# E-commerce Database Project
 
-This project provides a relational database schema for an E-commerce system using PostgreSQL. It is designed to handle key business operations such as customer management, product cataloging, order tracking, and payment processing. The schema uses the `SERIAL` keyword to automatically increment primary key values.
+This project contains a complete **PostgreSQL** database schema for an **E-commerce system**, along with sample data and common SQL operations. It is designed to demonstrate how to model an online shopping platform using relational database principles. The database handles customers, products, orders, order items, categories, and payments, with proper use of keys and data constraints.
 
-## Project Structure
+---
 
-* `schema.sql` contains all the SQL statements to create the database tables.
-* `README.md` provides an overview of the schema and instructions for use.
+## Features
 
-## Schema Overview
+* Defines a normalized schema with six interconnected tables
+* Uses `SERIAL` for auto-incrementing primary keys (PostgreSQL style)
+* Ensures referential integrity using `FOREIGN KEY` constraints
+* Handles missing values with `NULL`
+* Populates tables using `INSERT INTO`
+* Demonstrates data manipulation with `UPDATE` and `DELETE`
+* Clean and consistent data practices
 
-The database is composed of the following main entities:
+---
 
-1. Customers – stores customer information like name, email, phone number, and address.
-2. Categories – represents product categories such as electronics, clothing, etc.
-3. Products – contains product details including name, price, stock quantity, and category.
-4. Orders – records each customer order with the order date and total amount.
-5. OrderItems – links products to orders and specifies quantity and price per item.
-6. Payments – stores payment information related to each order.
+## Database Schema Overview
 
-## Relationships Between Tables
+### Entities and Relationships
 
-* Each customer can place multiple orders.
-* Each order can contain multiple order items.
-* Each order item is linked to a specific product.
-* Each product belongs to one category.
-* Each order has one associated payment.
+1. **Customers** – Customers who place orders
+2. **Categories** – Product categories
+3. **Products** – Items available for purchase
+4. **Orders** – Orders placed by customers
+5. **OrderItems** – Products included in each order
+6. **Payments** – Payments for orders
 
-## Technologies Used
+### Relationships
 
-* PostgreSQL as the database system
-* SQL for schema definition
-* `SERIAL` data type for primary key auto-incrementation
+* A customer can place multiple orders
+* An order contains multiple order items
+* Each order item is linked to one product
+* Each product belongs to one category
+* Each order has one payment
 
-## How to Use
+---
 
-1. Clone the repository using Git.
-2. Open a PostgreSQL terminal or any SQL client.
-3. Connect to your PostgreSQL database.
-4. Run the `schema.sql` file to create all tables.
+## Handling Missing Values
 
-## Sample Queries and Data
+* `NULL` is used for missing optional values such as phone number or address
+* `SERIAL` handles auto-incrementing of primary keys, so those values do not need to be manually inserted
 
-You can extend this project by adding:
+---
 
-* Sample data using INSERT statements
-* Queries to get reports such as total revenue, order history, or top-selling products
+## Getting Started
 
-## Contributions
+1. Clone the repository or copy the SQL scripts
+2. Open PostgreSQL or any SQL client like pgAdmin
+3. Run the table creation SQL statements
+4. Insert sample data using the `INSERT` queries
+5. Test `UPDATE` and `DELETE` operations as needed
 
-Contributions are welcome. If you want to suggest improvements or report issues, feel free to open a discussion or pull request.
+---
 
-## License
+## Tools and Technologies
 
-This project can be used freely under the MIT License.
+* PostgreSQL
+* SQL (Data Definition and Manipulation)
+* Basic command-line or GUI-based PostgreSQL client
+
+---
 
 ## Contact
 
-Created by Akshit Jaiswal.
-For suggestions or inquiries, you can reach out via email or LinkedIn.
+Created by Akshit Jaiswal
+For feedback or questions, feel free to reach out via GitHub or email
 
