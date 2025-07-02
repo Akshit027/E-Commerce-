@@ -1,69 +1,156 @@
-# E-commerce Database Project
+# 🛒 E-commerce SQL Database Project
 
-This project contains a complete **PostgreSQL** database schema for an **E-commerce system**, along with sample data and common SQL operations. It is designed to demonstrate how to model an online shopping platform using relational database principles. The database handles customers, products, orders, order items, categories, and payments, with proper use of keys and data constraints.
-
----
-
-## Features
-
-* Defines a normalized schema with six interconnected tables
-* Uses `SERIAL` for auto-incrementing primary keys (PostgreSQL style)
-* Ensures referential integrity using `FOREIGN KEY` constraints
-* Handles missing values with `NULL`
-* Populates tables using `INSERT INTO`
-* Demonstrates data manipulation with `UPDATE` and `DELETE`
-* Clean and consistent data practices
+This project provides a complete relational database system for an E-commerce application, developed using SQL with PostgreSQL syntax. It includes schema creation, data population, aggregation, joins, and advanced query logic using subqueries. The project demonstrates essential database concepts suitable for academic, learning, or small-scale production purposes.
 
 ---
 
-## Database Schema Overview
+## 📌 Overview
 
-### Entities and Relationships
+The database system is designed around the following key entities:
 
-1. **Customers** – Customers who place orders
-2. **Categories** – Product categories
-3. **Products** – Items available for purchase
-4. **Orders** – Orders placed by customers
-5. **OrderItems** – Products included in each order
-6. **Payments** – Payments for orders
-
-### Relationships
-
-* A customer can place multiple orders
-* An order contains multiple order items
-* Each order item is linked to one product
-* Each product belongs to one category
-* Each order has one payment
+- **Customers** – Stores customer details
+- **Products** – Items available for purchase
+- **Orders** – Represents customer purchases
+- **OrderItems** – Line items for each product in an order
+- **Payments** – Payment information related to each order
+- **Categories** – Product categorization (e.g., Electronics, Clothing)
 
 ---
 
-## Handling Missing Values
+## ✅ Tasks Summary
 
-* `NULL` is used for missing optional values such as phone number or address
-* `SERIAL` handles auto-incrementing of primary keys, so those values do not need to be manually inserted
+### **Task 1: Schema Design**
+- Chose the **E-commerce** domain.
+- Identified core entities and their relationships.
+- Defined a structured schema with `Customers`, `Products`, `Orders`, `OrderItems`, `Payments`, and `Categories`.
+- Primary and foreign keys were used to enforce referential integrity.
+
+### **Task 2: Table Creation**
+- Created tables using `CREATE TABLE` syntax with PostgreSQL.
+- Used the `SERIAL` keyword to auto-increment primary keys.
+- Defined proper constraints, such as `UNIQUE`, `NOT NULL`, `FOREIGN KEY`, and `PRIMARY KEY`.
+
+### **Task 3: Data Insertion and Cleaning**
+- Populated tables using `INSERT INTO`.
+- Handled missing values with `NULL` or left out columns with defaults.
+- Used `UPDATE` to modify data and `DELETE` with `WHERE` clauses to clean up or remove specific rows.
+  
+  #### Example:
+  ```sql
+  UPDATE Products SET stock = stock - 1 WHERE product_id = 1;
+  DELETE FROM Customers WHERE customer_id = 3;
+````
+
+### **Task 4**: Aggregation and Grouping**
+
+* Applied aggregate functions like `SUM`, `COUNT`, and `AVG` on numeric fields.
+* Used `GROUP BY` to group data (e.g., by customer, category, or date).
+* Applied `HAVING` to filter grouped results.
+
+  #### Example:
+
+  ```sql
+  SELECT customer_id, SUM(total_amount) AS total_spent
+  FROM Orders
+  GROUP BY customer_id
+  HAVING SUM(total_amount) > 10000;
+  ```
+
+### **Task 5: SQL Joins**
+
+* Demonstrated `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, and `FULL JOIN` between tables.
+* Combined `Customers` and `Orders` to view purchase history.
+* Displayed data even when some entities (like customers or orders) had no match in the related table.
+
+  #### Example:
+
+  ```sql
+  SELECT c.name, o.order_id
+  FROM Customers c
+  LEFT JOIN Orders o ON c.customer_id = o.customer_id;
+  ```
+
+### **Task 6: Subqueries and Nested Queries**
+
+* Used scalar subqueries to return single values.
+* Used correlated subqueries where the inner query depends on the outer row.
+* Implemented subqueries inside `IN`, `EXISTS`, and `=` conditions.
+
+  #### Example:
+
+  ```sql
+  SELECT name
+  FROM Customers
+  WHERE customer_id IN (
+      SELECT customer_id FROM Orders
+  );
+
+  SELECT name,
+         (SELECT AVG(total_amount) 
+          FROM Orders o 
+          WHERE o.customer_id = c.customer_id) AS avg_order
+  FROM Customers c;
+  ```
 
 ---
 
-## Getting Started
+## 🛠️ Technologies Used
 
-1. Clone the repository or copy the SQL scripts
-2. Open PostgreSQL or any SQL client like pgAdmin
-3. Run the table creation SQL statements
-4. Insert sample data using the `INSERT` queries
-5. Test `UPDATE` and `DELETE` operations as needed
+* PostgreSQL (recommended)
+* MySQL or SQLite (with minor syntax adjustments)
+* DB Browser for SQLite / MySQL Workbench / pgAdmin
 
 ---
 
-## Tools and Technologies
+## 📁 Project Structure
 
-* PostgreSQL
-* SQL (Data Definition and Manipulation)
-* Basic command-line or GUI-based PostgreSQL client
+* `schema.sql` – Contains `CREATE TABLE` statements.
+* `insert_data.sql` – Contains all `INSERT` statements with sample data.
+* `aggregate_queries.sql` – Queries for Task 4.
+* `join_queries.sql` – Examples of INNER, LEFT, RIGHT, FULL joins.
+* `subquery_examples.sql` – Advanced queries using subqueries.
+* `README.md` – Documentation.
 
 ---
 
-## Contact
+## 🚀 Getting Started
 
-Created by Akshit Jaiswal
-For feedback or questions, feel free to reach out via GitHub or email
+1. Clone this repository.
+2. Open your SQL environment (e.g., pgAdmin, MySQL Workbench).
+3. Run `schema.sql` to create the tables.
+4. Run `insert_data.sql` to populate sample data.
+5. Explore and modify queries from other `.sql` files.
+
+---
+
+## 📊 Learning Outcomes
+
+By completing this project, you will:
+
+* Understand how to design a normalized relational database
+* Write clean SQL queries for data insertion and updates
+* Analyze data using aggregate functions and grouping
+* Merge data using different join types
+* Use subqueries for complex logic and reporting
+
+---
+
+## 🤝 Contributions
+
+Pull requests and suggestions are welcome! This project is intended to support SQL learning and database design practice.
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 👤 Author
+
+**Akshit Jaiswal**
+Email: ajaiswal@gitam.com
+
+```
 
