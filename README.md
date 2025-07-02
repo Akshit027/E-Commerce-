@@ -39,7 +39,6 @@ The database system is designed around the following key entities:
   ```sql
   UPDATE Products SET stock = stock - 1 WHERE product_id = 1;
   DELETE FROM Customers WHERE customer_id = 3;
-````
 
 ### **Task 4**: Aggregation and Grouping**
 
