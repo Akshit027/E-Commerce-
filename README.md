@@ -91,6 +91,40 @@ The database system is designed around the following key entities:
   FROM Customers c;
   ```
 
+  ### **Task 7: Creating Views**
+
+  ### Created reusable SQL views to simplify complex logic:
+    #### Example:
+
+  ```sql
+    CREATE VIEW CustomerOrderSummary AS SELECT 
+    c.customer_id, 
+    c.name, 
+    COUNT(o.order_id) AS total_orders, 
+    SUM(o.total_amount) AS total_spent FROM Customers c
+    JOIN Orders o ON c.customer_id = o.customer_id
+    GROUP BY c.customer_id, c.name;
+  ```
+
+  ### **Task 8: Stored Procedures and Functions**
+
+  ### Stored Procedure:
+    ```sql
+  DELIMITER //
+    CREATE PROCEDURE AddProduct (
+    IN p_name VARCHAR(100),
+    IN p_price DECIMAL(10, 2),
+    IN p_stock INT
+    )
+    BEGIN
+    INSERT INTO Products (name, price, stock)
+    VALUES (p_name, p_price, p_stock);
+    END;
+    //
+    DELIMITER ;
+  ```
+
+
 ---
 
 ## 🛠️ Technologies Used
@@ -108,6 +142,8 @@ The database system is designed around the following key entities:
 * `aggregate_queries.sql` – Queries for Task 4.
 * `join_queries.sql` – Examples of INNER, LEFT, RIGHT, FULL joins.
 * `subquery_examples.sql` – Advanced queries using subqueries.
+* `views.sql`': View creation queries
+* `procedures.sql`procedures.sql: Stored procedures and functions
 * `README.md` – Documentation.
 
 ---
